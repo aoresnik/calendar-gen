@@ -62,14 +62,14 @@ f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 1
 
 months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
 
-easter = dateutil.easter.easter(2020)
+easter_monday = dateutil.easter.easter(year) + datetime.timedelta(days=1)
 
 # Slovenian
 holidays = [
     # [day, month]
-    [1, 1], [2, 1], [8, 2], [27, 4], [1, 5], [2, 5], [25, 6], [15, 8], [31, 10], [1, 11], [24, 12], [25, 12],
-    # easter (variable)
-    [easter.day, easter.month]
+    [1, 1], [2, 1], [8, 2], [27, 4], [1, 5], [2, 5], [25, 6], [15, 8], [31, 10], [1, 11], [25, 12], [26, 12],
+    # easter monday (varies every year)
+    [easter_monday.day, easter_monday.month]
 ]
 
 for month in range(1, 13):
