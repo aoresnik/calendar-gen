@@ -1,5 +1,6 @@
 import datetime
 import calendar
+import dateutil.easter
 
 f = open("calendar.html", "w")
 
@@ -14,12 +15,12 @@ body {
 }
 
 td.month-cell {
-  width: 7.5%;
+  width: 3.8%;
   border: 0px;
 }
 
 td.empty-cell, td.day-cell, td.saturday-cell, td.sunday-cell, td.holiday-cell {
-  width: 2.5%;
+  width: 2.6%;
   height: 2em;
 }
 
@@ -41,6 +42,10 @@ div.day-digit, div.saturday-digit, div.sunday-digit, div.holiday-digit {
   font-size: 0.5em;
 }
 
+div.holiday-digit {
+  color: red;
+}
+
 div.sunday-digit {
   color: red;
   font-weight: bold;
@@ -57,7 +62,17 @@ f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 1
 
 months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
 
-for month in range(1, 12):
+easter = dateutil.easter.easter(2020)
+
+# Slovenian
+holidays = [
+    # [day, month]
+    [1, 1], [2, 1], [8, 2], [27, 4], [1, 5], [2, 5], [25, 6], [15, 8], [31, 10], [1, 11], [24, 12], [25, 12],
+    # easter (variable)
+    [easter.day, easter.month]
+]
+
+for month in range(1, 13):
     f.write("<tr>")
     f.write('<td class="month-cell" style="text-align: right; ">' + months[month-1] + '</td>')
 
@@ -69,12 +84,15 @@ for month in range(1, 12):
             day = day_cell - shift
 
             weekday = calendar.weekday(year, month, day)
-            if weekday == 5:
-                daytype = 'saturday'
-            elif weekday == 6:
-                daytype = 'sunday'
+            if [day, month] in holidays:
+                daytype = 'holiday'
             else:
-                daytype = 'day'
+                if weekday == 5:
+                    daytype = 'saturday'
+                elif weekday == 6:
+                    daytype = 'sunday'
+                else:
+                    daytype = 'day'
 
             f.write('<td class="'+daytype+'-cell">')
             f.write('<div class="'+daytype+'-digit">' + str(day) + '</span>')
