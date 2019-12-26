@@ -1,10 +1,19 @@
 import datetime
 import calendar
+import sys
+
 import dateutil.easter
 
-f = open("calendar.html", "w")
+if len(sys.argv) == 2:
+    year = int(sys.argv[1])
+    print("Generating calendar for year " + str(year) + " (specified on command line)")
+else:
+    year = datetime.datetime.now().year + 1
+    print("Generating calendar for year " + str(year) + " (next year)")
 
-year = 2020
+file_name = "calendar_" + str(year) + ".html"
+print("Writing file " + file_name)
+f = open(file_name, "w")
 
 f.write("""<html>
 <head><title>Koledar """ + str(year) + """</title>
