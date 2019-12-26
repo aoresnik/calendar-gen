@@ -56,7 +56,7 @@ div.sunday-digit {
 """)
 f.write("<body>")
 
-f.write('<p style="text-align: center; ">'+ str(year) + '</p>')
+f.write('<p style="text-align: center; font-size: 1.5em">'+ str(year) + '</p>')
 
 f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 100%;">')
 
@@ -74,14 +74,14 @@ holidays = [
 
 for month in range(1, 13):
     f.write("<tr>")
-    f.write('<td class="month-cell" style="text-align: right; ">' + months[month-1] + '</td>')
 
     shift, days_in_month = calendar.monthrange(year, month)
 
+    f.write('<td class="month-cell" style="text-align: right; " colspan="' + str(shift+1) + '">' + months[month-1] + '</td>')
+
     # max 31 days + max 6 cells padding
-    for day_cell in range(1, 37):
-        if day_cell > shift and (day_cell - shift <= days_in_month):
-            day = day_cell - shift
+    for day_cell in range(1, days_in_month+1):
+            day = day_cell
 
             weekday = calendar.weekday(year, month, day)
             if [day, month] in holidays:
@@ -96,9 +96,7 @@ for month in range(1, 13):
 
             f.write('<td class="'+daytype+'-cell">')
             f.write('<div class="'+daytype+'-digit">' + str(day) + '</span>')
-        else:
-            f.write('<td class="empty-cell">')
-        f.write("</td>")
+            f.write("</td>")
 
     f.write("</tr>")
 
