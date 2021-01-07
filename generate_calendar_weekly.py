@@ -28,7 +28,7 @@ td.month-cell {
 }
 
 td.empty-cell, td.week-cell {
-  height: 3em;
+  height: 2em;
 }
 
 td.empty-cell {
