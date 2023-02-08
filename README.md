@@ -18,7 +18,7 @@ On the other hand, paper requires:
 - taking a pen from the holder on the board,
 - ticking the appropriate boxes.
 
-I didn't want to complicate already tedious routine task with any more bureaucracy than strictly neccessary.
+I didn't want to complicate already tedious routine tasks with any more bureaucracy than strictly neccessary.
 
 ## Why not interactive page? Why CLI script?
 
