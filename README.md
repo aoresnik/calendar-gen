@@ -4,9 +4,9 @@ Scripts to generate yearly, monthly and weekly sheets for tracking of key period
 
 NOTE: the scripts generate month and week names in Slovenian, they also mark Slovenian holidays - they require adaptations for use by citizens of other coutries. Week numbers are by ISO 8601 standard.
 
-# FAQ
+## FAQ
 
-## Why physical paper? There's an app for that!
+### Why physical paper? There's an app for that!
 
 Of course there's an app for that, but the app requires:
 - unlocking the phone,
@@ -20,6 +20,6 @@ On the other hand, paper requires:
 
 I didn't want to complicate already tedious routine tasks with any more bureaucracy than strictly neccessary.
 
-## Why not interactive page? Why CLI script?
+### Why not interactive page? Why CLI script?
 
 Planned.
