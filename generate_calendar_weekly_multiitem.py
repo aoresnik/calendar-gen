@@ -1,24 +1,25 @@
-import datetime
-import calendar
-import sys
+#! /usr/bin/env python3
 
-import dateutil.easter
+import datetime
+import sys
 
 N_TASK_CELLS = 12
 
 if len(sys.argv) == 2:
     year = int(sys.argv[1])
-    print("Generating calendar for year " + str(year) + " (specified on command line)")
+    year_to = year + 9
 else:
-    year = datetime.datetime.now().year + 1
-    print("Generating calendar for year " + str(year) + " (next year)")
+    print("Usage: " + sys.argv[0] + " <year>", file=sys.stderr)
+    sys.exit(1)
+
+print("Generating weekly multi-item calendar for year " + str(year), file=sys.stderr)
 
 file_name = "calendar_" + str(year) + "_weekly_multiitem.html"
-print("Writing file " + file_name)
+print("Writing file " + file_name, file=sys.stderr)
 f = open(file_name, "w")
 
 f.write("""<html>
-<head><title>Koledar """ + str(year) + """</title>
+<head><title>Weekly tasks for """ + str(year) + """</title>
 <style>
 
 body {

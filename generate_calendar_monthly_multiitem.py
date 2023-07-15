@@ -1,18 +1,18 @@
-import datetime
-import calendar
-import sys
+#! /usr/bin/env python3
 
-import dateutil.easter
+import sys
 
 if len(sys.argv) == 2:
     year = int(sys.argv[1])
-    print("Generating calendar for year " + str(year) + " (specified on command line)")
+    year_to = year + 9
 else:
-    year = datetime.datetime.now().year + 1
-    print("Generating calendar for year " + str(year) + " (next year)")
+    print("Usage: " + sys.argv[0] + " <year>", file=sys.stderr)
+    sys.exit(1)
+
+print("Generating monthly multi-item calendar for year " + str(year), file=sys.stderr)
 
 file_name = "calendar_" + str(year) + "_monthly_multiitem.html"
-print("Writing file " + file_name)
+print("Writing file " + file_name, file=sys.stderr)
 f = open(file_name, "w")
 
 f.write("""<html>
@@ -50,6 +50,7 @@ months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 
 def format_day(d):
     return "{}.{}".format(d.day, d.month) if d.year==year else "{}.{}.{}".format(d.day, d.month, d.year)
 
+# Chosen to fit an A4 page
 N_ENTRIES = 38
 
 f.write("<tr>")

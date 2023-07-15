@@ -1,22 +1,22 @@
-import datetime
-import calendar
-import sys
+#! /usr/bin/env python3
 
-import dateutil.easter
+import sys
 
 if len(sys.argv) == 2:
     year = int(sys.argv[1])
-    print("Generating calendar for year " + str(year) + " (specified on command line)")
+    year_to = year + 9
 else:
-    year = datetime.datetime.now().year + 1
-    print("Generating calendar for year " + str(year) + " (next year)")
+    print("Usage: " + sys.argv[0] + " <year>", file=sys.stderr)
+    sys.exit(1)
 
-file_name = "calendar_" + str(year) + "_yearly_multiitem.html"
-print("Writing file " + file_name)
+print("Generating calendar for years " + str(year) + " to " + str(year_to), file=sys.stderr)
+
+file_name = "calendar_" + str(year) + "_multiyear.html"
+print("Writing file " + file_name, file=sys.stderr)
 f = open(file_name, "w")
 
 f.write("""<html>
-<head><title>Yearly tasks """ + str(year) + """</title>
+<head><title>Yearly tasks """ + str(year) + """-""" + str(year_to) + """</title>
 <style>
 
 body {
@@ -48,6 +48,7 @@ years = range(year, year + 10)
 def format_day(d):
     return "{}.{}".format(d.day, d.month) if d.year==year else "{}.{}.{}".format(d.day, d.month, d.year)
 
+# Chosen to fit an A4 page
 N_ENTRIES = 31
 
 f.write("<tr>")
@@ -67,4 +68,6 @@ f.write("</table></p>")
 
 f.write("</body>")
 f.write("</html>")
+
+f.close()
 

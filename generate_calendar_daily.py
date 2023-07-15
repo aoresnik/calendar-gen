@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import datetime
 import calendar
 import sys
@@ -6,17 +8,17 @@ import dateutil.easter
 
 if len(sys.argv) == 2:
     year = int(sys.argv[1])
-    print("Generating calendar for year " + str(year) + " (specified on command line)")
+    year_to = year + 9
 else:
-    year = datetime.datetime.now().year + 1
-    print("Generating calendar for year " + str(year) + " (next year)")
+    print("Usage: " + sys.argv[0] + " <year>", file=sys.stderr)
+    sys.exit(1)
 
-file_name = "calendar_" + str(year) + ".html"
-print("Writing file " + file_name)
+file_name = "calendar_" + str(year) + "_daily.html"
+print("Writing file " + file_name, file=sys.stderr)
 f = open(file_name, "w")
 
 f.write("""<html>
-<head><title>Koledar """ + str(year) + """</title>
+<head><title>Daily tasks for year """ + str(year) + """</title>
 <style>
 
 body {
