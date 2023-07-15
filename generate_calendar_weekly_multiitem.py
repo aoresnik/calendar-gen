@@ -2,6 +2,7 @@
 
 import datetime
 import sys
+import subprocess
 
 N_TASK_CELLS = 12
 
@@ -14,9 +15,10 @@ else:
 
 print("Generating weekly multi-item calendar for year " + str(year), file=sys.stderr)
 
-file_name = "calendar_" + str(year) + "_weekly_multiitem.html"
-print("Writing file " + file_name, file=sys.stderr)
-f = open(file_name, "w")
+file_name_base = "calendar_" + str(year) + "_weekly_multiitem"
+file_name_html = file_name_base + ".html"
+print("Writing file " + file_name_html, file=sys.stderr)
+f = open(file_name_html, "w")
 
 f.write("""<html>
 <head><title>Weekly tasks for """ + str(year) + """</title>
@@ -121,3 +123,13 @@ f.write("</table></p>")
 
 f.write("</body>")
 f.write("</html>")
+
+f.close()
+
+file_name_pdf = file_name_base + ".pdf"
+print("Generating PDF " + file_name_pdf + " with wkhtmltopdf", file=sys.stderr) 
+try:
+  subprocess.run(["wkhtmltopdf", file_name_html, file_name_pdf])
+except FileNotFoundError:
+  print("ERROR: Could not find wkhtmltopdf - not generating PDF output. Plese install it to generate PDF output.", file=sys.stderr)
+  sys.exit(1)
