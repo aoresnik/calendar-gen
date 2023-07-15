@@ -2,7 +2,11 @@
 
 Scripts to generate yearly, monthly and weekly sheets for tracking of key periodic tasks (such as achieving daily sleep goals and daily exercise). Generates as HTML, intended to be printed on A4 page, without header and footer data. I tape them to a board and pyhsically write check marks.
 
-NOTE: the scripts generate month and week names in Slovenian, they also mark Slovenian holidays - they require adaptations for use by citizens of other coutries. Week numbers are by ISO 8601 standard.
+NOTE: the scripts currently generate month and week names in Slovenian, they also mark Slovenian holidays - they require adaptations for use by citizens of other coutries. Week numbers are by ISO 8601 standard. PDF are generated at page size A4.
+
+Requirements:
+* Python 3 (tested with 3.7.3)
+* `wkhtmltopdf` executable in path to generate PDF. If not present, only HTML format will be generated.
 
 ## FAQ
 
