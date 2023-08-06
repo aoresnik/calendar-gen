@@ -4,6 +4,8 @@ import sys
 import subprocess
 import locale
 
+import functions
+
 # Must be set in order to take into account system locale, otherwise defaults to English!? (see https://stackoverflow.com/a/17903086)
 locale.setlocale(locale.LC_ALL, '')
 
@@ -78,9 +80,4 @@ f.write("</html>")
 f.close()
 
 file_name_pdf = file_name_base + ".pdf"
-print("Generating PDF " + file_name_pdf + " with wkhtmltopdf", file=sys.stderr) 
-try:
-  subprocess.run(["wkhtmltopdf", file_name_html, file_name_pdf])
-except FileNotFoundError:
-  print("ERROR: Could not find wkhtmltopdf - not generating PDF output. Plese install it to generate PDF output.", file=sys.stderr)
-  sys.exit(1)
+functions.generate_pdf_file(file_name_html, file_name_pdf)
