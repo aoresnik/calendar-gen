@@ -2,6 +2,11 @@
 
 import sys
 import subprocess
+import calendar
+import locale
+
+# Must be set in order to take into account system locale, otherwise defaults to English!? (see https://stackoverflow.com/a/17903086)
+locale.setlocale(locale.LC_ALL, '')
 
 if len(sys.argv) == 2:
     year = int(sys.argv[1])
@@ -47,7 +52,7 @@ f.write('<p style="text-align: center; font-size: 1.5em">'+ str(year) + '</p>')
 
 f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 100%;">')
 
-months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
+months = [calendar.month_abbr[i] for i in range(1,13)]
 
 def format_day(d):
     return "{}.{}".format(d.day, d.month) if d.year==year else "{}.{}.{}".format(d.day, d.month, d.year)

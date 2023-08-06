@@ -3,6 +3,11 @@
 import datetime
 import sys
 import subprocess
+import calendar
+import locale
+
+# Must be set in order to take into account system locale, otherwise defaults to English!? (see https://stackoverflow.com/a/17903086)
+locale.setlocale(locale.LC_ALL, '')
 
 N_TASK_CELLS = 12
 
@@ -67,8 +72,6 @@ f.write('<p style="text-align: center; font-size: 1.5em">'+ str(year) + '</p>')
 
 f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 100%;">')
 
-months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
-
 day = datetime.date(year, 1, 1)
 day_iso = day.isocalendar()
 
@@ -115,7 +118,7 @@ while day_iso[0] <= year:
         n_weeks_in_month += 1
 
     f.write('<td class="month-cell" rowspan=' + str(n_weeks_in_month+1) + '>')
-    f.write('<span class="date-text">' + months[month-1] + '</span>')
+    f.write('<span class="date-text">' + calendar.month_abbr[month-1] + '</span>')
     f.write("</td>")
     f.write(month_html)
 

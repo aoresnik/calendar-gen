@@ -2,6 +2,10 @@
 
 import sys
 import subprocess
+import locale
+
+# Must be set in order to take into account system locale, otherwise defaults to English!? (see https://stackoverflow.com/a/17903086)
+locale.setlocale(locale.LC_ALL, '')
 
 if len(sys.argv) == 2:
     year = int(sys.argv[1])

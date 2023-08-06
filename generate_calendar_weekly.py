@@ -3,6 +3,11 @@
 import datetime
 import sys
 import subprocess
+import calendar
+import locale
+
+# Must be set in order to take into account system locale, otherwise defaults to English!? (see https://stackoverflow.com/a/17903086)
+locale.setlocale(locale.LC_ALL, '')
 
 if len(sys.argv) == 2:
     year = int(sys.argv[1])
@@ -60,8 +65,6 @@ f.write('<p style="text-align: center; font-size: 1.5em">'+ str(year) + '</p>')
 
 f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 100%;">')
 
-months = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
-
 day = datetime.date(year, 1, 1)
 day_iso = day.isocalendar()
 
@@ -81,7 +84,7 @@ while day_iso[0] <= year:
 
     # The day falls into the month 
     month = (day + datetime.timedelta(days=4)).month
-    f.write('<td class="month-cell" style="text-align: right;">' + months[month-1] + '</td>')
+    f.write('<td class="month-cell" style="text-align: right;">' + calendar.month_abbr[month-1] + '</td>')
 
     while (day + datetime.timedelta(days=4)).month == month:
         end_day = day + datetime.timedelta(days=6)
