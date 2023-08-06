@@ -5,7 +5,7 @@ Scripts to generate yearly, monthly and weekly sheets for tracking of key period
 [Example daily calendar for year 2023](examples/calendar_2023_daily.pdf) (see other examples in the **examples** folder)
 [![daily calendar for year 2023](examples/calendar_2023_daily.png)](examples/calendar_2023_daily.pdf)
 
-NOTE: the scripts currently generate month and week names in Slovenian, they also mark Slovenian holidays - they require adaptations for use by citizens of other coutries. Week numbers are by ISO 8601 standard. PDF are generated at page size A4.
+NOTE: The scripts currently generate month and week names from current locale. Holidays are marked if the current locale country is supported by the Python holidays library (https://pypi.org/project/holidays/). Week numbers are by ISO 8601 standard. PDF are generated at page size A4.
 
 Requirements:
 * Python 3 (tested with 3.7.3)

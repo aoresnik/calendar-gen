@@ -7,6 +7,8 @@ import subprocess
 import calendar
 import locale
 
+import holidays
+
 # Must be set in order to take into account system locale, otherwise defaults to English!? (see https://stackoverflow.com/a/17903086)
 locale.setlocale(locale.LC_ALL, '')
 
@@ -80,13 +82,14 @@ f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 1
 
 easter_monday = dateutil.easter.easter(year) + datetime.timedelta(days=1)
 
-# Slovenian
-holidays = [
-    # [day, month]
-    [1, 1], [2, 1], [8, 2], [27, 4], [1, 5], [2, 5], [25, 6], [15, 8], [31, 10], [1, 11], [25, 12], [26, 12],
-    # easter monday (varies every year)
-    [easter_monday.day, easter_monday.month]
-]
+[locale_lang, locale_encoding] = locale.getlocale()
+if locale_lang != None and len(locale_lang.split("_")) > 1:
+  locale_country = locale_lang.split("_")[1]
+  holidays = holidays.utils.country_holidays(country=locale_country)
+  if holidays == None:
+      print("No holidays for country " + locale_country + " found - not showing holidays", file=sys.stderr)
+else:      
+  print("Locale does not represent a coutnry, not showing holidays", file=sys.stderr)
 
 for month in range(1, 13):
     f.write("<tr>")
@@ -100,7 +103,7 @@ for month in range(1, 13):
             day = day_cell
 
             weekday = calendar.weekday(year, month, day)
-            if [day, month] in holidays:
+            if holidays != None and datetime.date(year, month, day) in holidays:
                 daytype = 'holiday'
             else:
                 if weekday == 5:
