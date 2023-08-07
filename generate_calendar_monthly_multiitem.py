@@ -54,7 +54,7 @@ f.write('<p style="text-align: center; font-size: 1.5em">'+ str(year) + '</p>')
 
 f.write('<p><table style="border-spacing: 0; border-collapse: collapse; width: 100%;">')
 
-months = [calendar.month_abbr[i] for i in range(1,13)]
+months = [calendar.month_abbr[i].encode('ascii', 'xmlcharrefreplace').decode('ascii') for i in range(1,13)]
 
 def format_day(d):
     return "{}.{}".format(d.day, d.month) if d.year==year else "{}.{}.{}".format(d.day, d.month, d.year)
@@ -83,4 +83,4 @@ f.write("</html>")
 f.close()
 
 file_name_pdf = file_name_base + ".pdf"
-functions.generate_pdf_file(file_name_html, file_name_pdf)
+functions.generate_pdf_file(file_name_html, file_name_pdf, orientation="Portrait")

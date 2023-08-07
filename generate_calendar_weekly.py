@@ -85,7 +85,7 @@ while day_iso[0] <= year:
 
     # The day falls into the month 
     month = (day + datetime.timedelta(days=4)).month
-    f.write('<td class="month-cell" style="text-align: right;">' + calendar.month_abbr[month-1] + '</td>')
+    f.write('<td class="month-cell" style="text-align: right;">' + calendar.month_abbr[month].encode('ascii', 'xmlcharrefreplace').decode('ascii') + '</td>')
 
     while (day + datetime.timedelta(days=4)).month == month:
         end_day = day + datetime.timedelta(days=6)

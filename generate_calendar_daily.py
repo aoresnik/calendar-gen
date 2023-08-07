@@ -98,7 +98,7 @@ for month in range(1, 13):
 
     shift, days_in_month = calendar.monthrange(year, month)
 
-    f.write('<td class="month-cell" style="text-align: right; " colspan="' + str(shift+1) + '">' + calendar.month_abbr[month] + '</td>')
+    f.write('<td class="month-cell" style="text-align: right; " colspan="' + str(shift+1) + '">' + calendar.month_abbr[month].encode('ascii', 'xmlcharrefreplace').decode('ascii') + '</td>')
 
     # max 31 days + max 6 cells padding
     for day_cell in range(1, days_in_month+1):

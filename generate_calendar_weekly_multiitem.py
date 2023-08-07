@@ -120,7 +120,7 @@ while day_iso[0] <= year:
         n_weeks_in_month += 1
 
     f.write('<td class="month-cell" rowspan=' + str(n_weeks_in_month+1) + '>')
-    f.write('<span class="date-text">' + calendar.month_abbr[month-1] + '</span>')
+    f.write('<span class="date-text">' + calendar.month_abbr[month].encode('ascii', 'xmlcharrefreplace').decode('ascii') + '</span>')
     f.write("</td>")
     f.write(month_html)
 
@@ -132,4 +132,4 @@ f.write("</html>")
 f.close()
 
 file_name_pdf = file_name_base + ".pdf"
-functions.generate_pdf_file(file_name_html, file_name_pdf)
+functions.generate_pdf_file(file_name_html, file_name_pdf, orientation="Portrait")
