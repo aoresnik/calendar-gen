@@ -1,3 +1,4 @@
 calendar_*.html
 calendar_*.pdf
 *.pyc
+.venv
