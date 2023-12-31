@@ -2,7 +2,6 @@
 
 import datetime
 import sys
-import subprocess
 import calendar
 import locale
 

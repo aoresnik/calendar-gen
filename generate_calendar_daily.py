@@ -3,7 +3,6 @@
 import datetime
 import calendar
 import sys
-import subprocess
 import calendar
 import locale
 
@@ -71,6 +70,10 @@ div.holiday-digit {
 div.sunday-digit {
   color: red;
   font-weight: bold;
+}
+
+tr {
+  line-height: 2em;
 }
 
 </style>
