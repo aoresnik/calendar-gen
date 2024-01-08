@@ -49,8 +49,8 @@ td.week-cell, td.checkmark-cell, td.month-cell, td.legend-cell {
   vertical-align: top;
 }
 
-td.legend-cell {
-  height: 4em;
+td.week-cell, td.checkmark-cell, td.month-cell, td.legend-cell {
+  height: 1em;
 }
 
 td.checkmark-cell {
@@ -58,7 +58,7 @@ td.checkmark-cell {
 }
 
 span.week-text, span.date-end-text, span.date-text {
-  font-size: 0.7em;
+  font-size: 0.65em;
 }
 
 span.date-end-text { color: red; }
@@ -106,19 +106,20 @@ while day_iso[0] <= year:
         month_html += "<tr>"
         end_day = day + datetime.timedelta(days=6)
         month_html += '<td class="week-cell">'
-        month_html += '<span class="date-text">' + format_day(day) + '</span> - <span class="date-end-text">' + format_day(end_day) + '</span>'
+        month_html += '<span class="date-text">' + format_day(day) + ' - </span><span class="date-end-text">' + format_day(end_day) + '</span>'
         month_html += "</td>"
         month_html += '<td class="week-cell">'
         month_html += '<span class="week-text"> W:' + str(day_iso[1]) + '</span>'
         month_html += "</td>"
         for i in range(N_TASK_CELLS):
-            month_html += '<td class="checkmark-cell">&nbsp;</td>'
+            month_html += '<td class="checkmark-cell"><span class="week-text">&nbsp;</span></td>'
         day = day + datetime.timedelta(days=7)
         day_iso = day.isocalendar()
         month_html += "</tr>"
         n_weeks_in_month += 1
 
-    f.write('<td class="month-cell" rowspan=' + str(n_weeks_in_month+1) + '>')
+    # FIXME: this <td> should be nested inside the <tr> for first week of the month
+    f.write('<td class="month-cell" rowspan="' + str(n_weeks_in_month+1) + '">')
     f.write('<span class="date-text">' + calendar.month_abbr[month].encode('ascii', 'xmlcharrefreplace').decode('ascii') + '</span>')
     f.write("</td>")
     f.write(month_html)
