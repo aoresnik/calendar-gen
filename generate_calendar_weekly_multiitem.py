@@ -49,12 +49,16 @@ td.week-cell, td.checkmark-cell, td.month-cell, td.legend-cell {
   vertical-align: top;
 }
 
-td.week-cell, td.checkmark-cell, td.month-cell, td.legend-cell {
+td.week-cell, td.checkmark-cell, td.month-cell {
   height: 1em;
 }
 
+td.legend-cell {
+  height: 3em;
+}
+
 td.checkmark-cell {
-  width: 6.8%;
+  width: 6.75%;
 }
 
 span.week-text, span.date-end-text, span.date-text {
@@ -85,7 +89,7 @@ if day_iso[0] < year:
     day_iso = day.isocalendar()
 
 def format_day(d):
-    return "{}.{}".format(d.day, d.month) if d.year==year else "{}.{}.{}".format(d.day, d.month, d.year)
+    return "{}.{}".format(d.day, d.month) if d.year==year else "{}.{}.{}".format(d.day, d.month, d.year % 100)
 
 f.write("<tr>")
 f.write('<td class="empty-cell"></td>')
